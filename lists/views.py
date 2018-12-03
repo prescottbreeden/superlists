@@ -1,6 +1,9 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, redirect
 
-# Create your views here.
 
 def home_page(request):
-    return HttpResponse("<html><title>To-Do Lists</title><h1>To-Do</h1></html>")
+    return render(request, 'home.html')
+
+
+def new_item(request):
+    return redirect(home_page)

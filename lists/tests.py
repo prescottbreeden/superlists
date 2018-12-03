@@ -2,11 +2,11 @@ from django.test import TestCase
 
 
 class HomePageTest(TestCase):
-    def test_home_page(self):
+
+    def test_uses_home_template(self):
         response = self.client.get('/')
-        self.assertIn(
-            '<title>To-Do Lists</title>',
-            response.content.decode()
-        )
-        self.assertTrue(response.content.decode().startswith('<html>'))
-        self.assertTrue(response.content.decode().endswith('</html>'))
+        self.assertTemplateUsed(response, 'home.html')
+
+    def test_handles_post_request(self):
+        response = self.client.post('/newitem', {'item_text': 'a list item'})
+        self.assertIn('a list item', response.content)
